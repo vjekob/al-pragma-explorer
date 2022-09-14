@@ -37,7 +37,7 @@ export function parse(uri: Uri): PragmaParseResult[] {
             if (!!part && part !== 'AND' && part !== 'OR' ) {
                 results.push({
                     uri,
-                    id: part,
+                    id: part.trim(),
                     position: new Position(line, character)
                 });
               }

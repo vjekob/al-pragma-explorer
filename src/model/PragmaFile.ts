@@ -30,7 +30,7 @@ export class PragmaFile extends TreeItem implements PragmaTreeItem {
 
         const pragmas = parse(this.resourceUri!).filter(p => p.id === this._pragma);
         
-        this.instances = pragmas.map(pragma => new PragmaInstance(pragma.position));
+        this.instances = pragmas.map(pragma => new PragmaInstance(this.resourceUri!, pragma.position));
         return this.instances;
     }
 }
