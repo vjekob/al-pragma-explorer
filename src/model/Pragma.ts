@@ -2,6 +2,7 @@ import { TreeItem, TreeItemCollapsibleState, Uri, workspace, WorkspaceFolder } f
 import { getFiles } from '../parser/getFiles';
 import { ALObjectType } from './ALObjectType';
 import { PragmaFile } from './PragmaFile';
+import { PragmaParseResult } from './PragmaParseResult';
 import { PragmaTreeItem } from './PragmaTreeItem';
 
 export class Pragma extends TreeItem implements PragmaTreeItem {
@@ -10,9 +11,9 @@ export class Pragma extends TreeItem implements PragmaTreeItem {
     public name: string;
     public files?: PragmaFile[];
 
-    constructor(pragma: string, parent: WorkspaceFolder) {
-        super(pragma, TreeItemCollapsibleState.Collapsed);
-        this.name = pragma;
+    constructor(pragma: PragmaParseResult, parent: WorkspaceFolder) {
+        super(pragma.id, TreeItemCollapsibleState.Collapsed);
+        this.name = pragma.id;
         this._parent = parent;
     }
 

@@ -1,5 +1,8 @@
-import { TreeItem, TreeItemCollapsibleState, Uri, WorkspaceFolder } from 'vscode';
+import { TreeItem, TreeItemCollapsibleState, Uri, workspace, WorkspaceFolder } from 'vscode';
+import { getFiles } from '../parser/getFiles';
+import { parse } from '../parser/parse';
 import { Pragma } from './Pragma';
+import { PragmaParseResult } from './PragmaParseResult';
 import { PragmaTreeItem } from './PragmaTreeItem';
 
 export class PragmaWorkspace extends TreeItem implements PragmaTreeItem {
@@ -19,7 +22,15 @@ export class PragmaWorkspace extends TreeItem implements PragmaTreeItem {
             return this.pragmas;
         }
 
-        this.pragmas = [new Pragma('MOCK', this.workspace)];
+        const alFiles = await getFiles();
+        const myFiles = alFiles.filter((uri) => workspace.getWorkspaceFolder(uri) === this.workspace);
+
+        const pragmas: PragmaParseResult[] = [];
+        for (let file of myFiles) {
+            pragmas.push(...parse(file));
+        }
+
+        this.pragmas = pragmas.map(pragma => new Pragma(pragma, this.workspace));
 
         return this.pragmas;
     }
