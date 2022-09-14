@@ -9,18 +9,9 @@
     "categories": [
         "Other"
     ],
-    "activationEvents": [
-        "onCommand:al-pragma-explorer.helloWorld"
-    ],
+    "activationEvents": [],
     "main": "./out/extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "al-pragma-explorer.helloWorld",
-                "title": "Hello World"
-            }
-        ]
-    },
+    "contributes": {},
     "prettier": {
         "tabWidth": 4,
         "printWidth": 120,
