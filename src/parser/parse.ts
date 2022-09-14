@@ -32,20 +32,24 @@ export function parse(uri: Uri): PragmaParseResult[] {
         lineUppercase = lineUppercase.replace(/[(]/g, ' ');
         lineUppercase = lineUppercase.replace(/[)]/g, ' ');
 
-        const parts = lineUppercase.split(' ');
+        const parts = lineUppercase.trim().split(' ');
         for (let part of parts) {
             part = part.trim();
-            if (!!part && part !== 'AND' && part !== 'OR' && part !== 'NOT') {
-                const result = results.find((result) => result.id === part);
-                if (result) {
-                    result.positions.push(new Position(line, character));
-                } else {
-                    results.push({
-                        uri,
-                        id: part,
-                        positions: [new Position(line, character)],
-                    });
-                }
+            switch(part) {
+                case 'AND':
+                case 'OR':
+                case 'NOT':
+                    continue;
+            }
+            const result = results.find((result) => result.id === part);
+            if (result) {
+                result.positions.push(new Position(line, character));
+            } else {
+                results.push({
+                    uri,
+                    id: part,
+                    positions: [new Position(line, character)],
+                });
             }
         }
     }
