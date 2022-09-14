@@ -53,7 +53,25 @@
                     "when": "view == al-pragma-explorer.view && viewItem == ispragma"
                 }
             ]
-        }
+        },
+        "configuration": [
+            {
+                "title": "AL Pragma Icon",
+                "properties": {
+                    "al-pragma-explorer.pragmaIcon": {
+                        "type": "string",
+                        "default": "symbol-constant",
+                        "enum": [
+                            "symbol-constant",
+                            "octoface",
+                            "symbol-class",
+                            "open-editors-view-icon"
+                        ],
+                        "description": "Shows the selected icon in the treeview pragmas"
+                    }
+                }
+            }
+        ]
     },
     "prettier": {
         "tabWidth": 4,

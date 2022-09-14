@@ -1,5 +1,5 @@
 import { ThemeIcon, TreeItem, TreeItemCollapsibleState, Uri, workspace, WorkspaceFolder } from 'vscode';
-import { getFiles } from '../parser/getFiles';
+import * as vscode from 'vscode';
 import { ALObjectType } from './ALObjectType';
 import { PragmaFile } from './PragmaFile';
 import { PragmaParseResult } from './PragmaParseResult';
@@ -14,7 +14,8 @@ export class Pragma extends TreeItem implements PragmaTreeItem {
     constructor(id: string, pragmas: PragmaParseResult[] | undefined, parent: WorkspaceFolder) {
         super(id, TreeItemCollapsibleState.Collapsed);
         this.name = id;
-        this.iconPath = new ThemeIcon('symbol-constant');
+        const settings = vscode.workspace.getConfiguration('al-pragma-explorer');
+        this.iconPath = new ThemeIcon(settings.pragmaIcon);
         this.folder = parent;
         this.resourceUri = Uri.from({ scheme: 'alpragmas', authority: this.folder.name, path: `/${id}` });
 
