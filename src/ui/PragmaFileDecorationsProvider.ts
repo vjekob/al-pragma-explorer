@@ -1,5 +1,5 @@
 import  { Event, EventEmitter, FileDecorationProvider, ThemeColor, Uri, workspace } from "vscode";
-import { getAlApp } from "../updater/updater";
+import { getALApp } from "../updater/updater";
 
 export class PragmaFileDecorationsProvider implements FileDecorationProvider {
     private _onDidChangeFileDecorations: EventEmitter<Uri | Uri[] | undefined> = new EventEmitter<Uri | Uri[] | undefined>();
@@ -15,7 +15,7 @@ export class PragmaFileDecorationsProvider implements FileDecorationProvider {
             return;
         }
 
-        const app = await getAlApp(folder);
+        const app = await getALApp(folder);
 
         const active = app?.preprocessorSymbols?.includes(uri.path.substring(1));
         return {

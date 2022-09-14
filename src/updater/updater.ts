@@ -1,12 +1,12 @@
 import { Uri, WorkspaceFolder } from 'vscode';
 import * as fs from 'fs';
-import { ALApp } from './AlApp';
+import { ALApp } from './ALApp';
 
 function getPath(folder: WorkspaceFolder) {
     return `${folder.uri?.fsPath}/app.json`;
 }
 
-export async function getAlApp(folder: WorkspaceFolder): Promise<ALApp | undefined> {
+export async function getALApp(folder: WorkspaceFolder): Promise<ALApp | undefined> {
     if (!folder) {
         return;
     }
@@ -32,7 +32,7 @@ export async function addPragma(folder: WorkspaceFolder, pragma: string) {
         return;
     }
     const uri = Uri.file(getPath(folder));
-    const app = await getAlApp(folder);
+    const app = await getALApp(folder);
 
     if (!app) {
         return;
@@ -55,7 +55,7 @@ export async function removePragma(folder: WorkspaceFolder, pragma: string) {
         return;
     }
     const uri = Uri.file(getPath(folder));
-    const app = await getAlApp(folder);
+    const app = await getALApp(folder);
 
     if (!app) {
         return;
