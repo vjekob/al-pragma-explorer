@@ -1,13 +1,15 @@
-import { Range } from "vscode";
+import { Range, TreeItem, TreeItemCollapsibleState } from 'vscode';
+import { PragmaTreeItem } from './PragmaTreeItem';
 
-export interface PragmaInstance {
-    range: Range;
+export class PragmaInstance extends TreeItem implements PragmaTreeItem {
+    public range: Range;
+
+    constructor(range: Range) {
+        super(`Line ${range.start.line + 1}`, TreeItemCollapsibleState.None);
+        this.range = range;
+    }
+
+    getChildren() {
+        return [];
+    }
 }
-
-
-/*
-Workspace = workspace folder
-- Pragma = identifier, e.g. CLEAN18
-    - File = file path: e.g. My.Codeunit.al
-        - Instance = line 18
-*/
