@@ -13,7 +13,17 @@
         "onLanguage:al"
     ],
     "main": "./out/extension.js",
-    "contributes": {},
+    "contributes": {
+        "views": {
+            "explorer": [
+                {
+                    "id": "al-pragma-explorer.view",
+                    "name": "Pragma Explorer",
+                    "contextualTitle": "Pragma Explorer"
+                }
+            ]
+        }
+    },
     "prettier": {
         "tabWidth": 4,
         "printWidth": 120,
