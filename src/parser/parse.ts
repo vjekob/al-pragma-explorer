@@ -28,18 +28,19 @@ export function parse(uri: Uri): PragmaParseResult[] {
         }
 
         lineUppercase = lineUppercase.substring(pos);
-        let comment = lineUppercase.indexOf('//');
-        if (comment >= 0) {
-            lineUppercase = lineUppercase.substring(0, comment);
-        }
+        lineUppercase = lineUppercase.split('//')[0]; //get rid off comments
+        lineUppercase = lineUppercase.replace(/[(]/g, ' ');
+        lineUppercase = lineUppercase.replace(/[)]/g, ' ');
 
         const parts = lineUppercase.split(' ');
         for (let part of parts) {
-            results.push({
-                uri,
-                id: part,
-                position: new Position(line, character),
-            });
+            if (!!part && part !== 'AND' && part !== 'OR' ) {
+                results.push({
+                    uri,
+                    id: part,
+                    position: new Position(line, character)
+                });
+              }
         }
     }
 
