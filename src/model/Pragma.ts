@@ -6,7 +6,7 @@ import { PragmaParseResult } from './PragmaParseResult';
 import { PragmaTreeItem } from './PragmaTreeItem';
 
 export class Pragma extends TreeItem implements PragmaTreeItem {
-    private _parent: WorkspaceFolder;
+    public folder: WorkspaceFolder;
 
     public name: string;
     public files?: PragmaFile[];
@@ -14,13 +14,14 @@ export class Pragma extends TreeItem implements PragmaTreeItem {
     constructor(id: string, pragmas: PragmaParseResult[] | undefined, parent: WorkspaceFolder) {
         super(id, TreeItemCollapsibleState.Collapsed);
         this.name = id;
-        this.iconPath = new ThemeIcon("symbol-constant");
-        this._parent = parent;
-        this.resourceUri = Uri.from({ scheme: "al-pragmas", authority: this._parent.name, path: `/${id}` });
+        this.iconPath = new ThemeIcon('symbol-constant');
+        this.folder = parent;
+        this.resourceUri = Uri.from({ scheme: 'alpragmas', authority: this.folder.name, path: `/${id}` });
 
         if (pragmas?.length) {
             this.files = pragmas.map((pragma) => new PragmaFile(pragma.uri, pragma.positions));
         }
+        this.contextValue = "ispragma";
     }
 
     async getChildren(): Promise<PragmaFile[]> {

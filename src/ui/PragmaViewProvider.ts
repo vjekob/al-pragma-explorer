@@ -36,7 +36,7 @@ export class PragmaViewProvider implements Disposable, TreeDataProvider<PragmaTr
 
     private getPragmaUriFromUri(uri: Uri) {
         const folder = workspace.getWorkspaceFolder(uri);
-        return Uri.from({ scheme: 'al-pragmas', authority: folder?.name });
+        return Uri.from({ scheme: 'alpragmas', authority: folder?.name });
     }
 
     private refresh() {

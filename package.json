@@ -14,6 +14,13 @@
     ],
     "main": "./out/extension.js",
     "contributes": {
+        "commands": [
+            {
+                "category": "Pragma",
+                "command": "al-pragma-explorer.toggle",
+                "title": "Toggle preprocessor directive"
+            }
+        ],
         "views": {
             "explorer": [
                 {
@@ -21,6 +28,21 @@
                     "name": "Pragma Explorer",
                     "contextualTitle": "Pragma Explorer",
                     "when": "al-pragma-explorer.showPragmaExplorer"
+                }
+            ]
+        },
+        "menus": {
+            "commandPalette": [
+                {
+                    "command": "al-pragma-explorer.toggle",
+                    "when": "false"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "group": "navigation",
+                    "command": "al-pragma-explorer.toggle",
+                    "when": "view == al-pragma-explorer.view && viewItem == ispragma"
                 }
             ]
         }
