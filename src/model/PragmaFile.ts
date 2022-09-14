@@ -11,6 +11,7 @@ export class PragmaFile extends TreeItem implements PragmaTreeItem {
     constructor(uri: Uri) {
         const filename = path.basename(uri.fsPath);
         super(filename, TreeItemCollapsibleState.Collapsed);
+        this.command = { command: "vscode.open", title: "", arguments: [uri] };
 
         this.resourceUri = uri;
         this.objectType = ALObjectType.Codeunit;
