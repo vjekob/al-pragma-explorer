@@ -1,3 +1,4 @@
+import path = require('path');
 import { Position, Range, ThemeIcon, TreeItem, TreeItemCollapsibleState, Uri } from 'vscode';
 import { ALObjectType } from './ALObjectType';
 import { PragmaInstance } from './PragmaInstance';
@@ -8,7 +9,8 @@ export class PragmaFile extends TreeItem implements PragmaTreeItem {
     public instances?: PragmaInstance[];
 
     constructor(uri: Uri) {
-        super(uri.fsPath, TreeItemCollapsibleState.Collapsed);
+        const filename = path.basename(uri.fsPath);
+        super(filename, TreeItemCollapsibleState.Collapsed);
 
         this.resourceUri = uri;
         this.objectType = ALObjectType.Codeunit;
