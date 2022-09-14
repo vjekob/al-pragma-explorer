@@ -35,7 +35,7 @@ export function parse(uri: Uri): PragmaParseResult[] {
         const parts = lineUppercase.split(' ');
         for (let part of parts) {
             part = part.trim();
-            if (!!part && part !== 'AND' && part !== 'OR') {
+            if (!!part && part !== 'AND' && part !== 'OR' && part !== 'NOT') {
                 const result = results.find((result) => result.id === part);
                 if (result) {
                     result.positions.push(new Position(line, character));
