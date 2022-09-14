@@ -11,7 +11,7 @@ The view shows a treeview of
       - Line `where-used`
 
 
-![al-Pragme-View](img/Code_HByrb9tr2Y.gif)
+![al-Pragme-View](img/Code_fKwUDaApe9.gif)
 
 ## Requirements
 
