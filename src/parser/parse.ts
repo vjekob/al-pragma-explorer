@@ -34,13 +34,19 @@ export function parse(uri: Uri): PragmaParseResult[] {
 
         const parts = lineUppercase.split(' ');
         for (let part of parts) {
-            if (!!part && part !== 'AND' && part !== 'OR' ) {
-                results.push({
-                    uri,
-                    id: part.trim(),
-                    position: new Position(line, character)
-                });
-              }
+            part = part.trim();
+            if (!!part && part !== 'AND' && part !== 'OR') {
+                const result = results.find((result) => result.id === part);
+                if (result) {
+                    result.positions.push(new Position(line, character));
+                } else {
+                    results.push({
+                        uri,
+                        id: part,
+                        positions: [new Position(line, character)],
+                    });
+                }
+            }
         }
     }
 
