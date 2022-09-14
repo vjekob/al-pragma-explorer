@@ -26,9 +26,9 @@ export class PragmaViewProvider implements Disposable, TreeDataProvider<PragmaTr
         const watcher = workspace.createFileSystemWatcher('{**/*.al,**/app.json}', false, false, false);
         this._disposables.push(watcher);
 
-        watcher.onDidChange(e => this.refresh());
-        watcher.onDidCreate(e => this.refresh());
-        watcher.onDidDelete(e => this.refresh());
+        watcher.onDidChange((e) => this.refresh());
+        watcher.onDidCreate((e) => this.refresh());
+        watcher.onDidDelete((e) => this.refresh());
 
         this._decorationsProvider = new PragmaFileDecorationsProvider();
         this._disposables.push(window.registerFileDecorationProvider(this._decorationsProvider));
@@ -36,14 +36,12 @@ export class PragmaViewProvider implements Disposable, TreeDataProvider<PragmaTr
 
     private getPragmaUriFromUri(uri: Uri) {
         const folder = workspace.getWorkspaceFolder(uri);
-        return Uri.from({ scheme: "al-pragmas", authority: folder?.name,})
+        return Uri.from({ scheme: 'al-pragmas', authority: folder?.name });
     }
 
-    private refresh(uri?: Uri) {
+    private refresh() {
         this._onDidChangeTreeData.fire(null);
-        if (uri) {
-            this._decorationsProvider.refresh(uri);
-        }
+        this._decorationsProvider.refresh();
     }
 
     getTreeItem(element: PragmaTreeItem): TreeItem | Thenable<TreeItem> {

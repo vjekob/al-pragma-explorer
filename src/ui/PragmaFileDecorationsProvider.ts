@@ -2,8 +2,8 @@ import  { Event, EventEmitter, FileDecorationProvider, ThemeColor, Uri, workspac
 import { getAlApp } from "../updater/updater";
 
 export class PragmaFileDecorationsProvider implements FileDecorationProvider {
-    onDidChangeFileDecorations?: Event<Uri | Uri[] | undefined> | undefined;
-    private _onDidChangeFileDecorations?: EventEmitter<Uri | Uri[] | undefined> | undefined;
+    private _onDidChangeFileDecorations: EventEmitter<Uri | Uri[] | undefined> = new EventEmitter<Uri | Uri[] | undefined>();
+    onDidChangeFileDecorations?: Event<Uri | Uri[] | undefined> = this._onDidChangeFileDecorations.event;
 
     async provideFileDecoration(uri: Uri) {
         if (uri.scheme !== "al-pragmas") {
@@ -21,11 +21,10 @@ export class PragmaFileDecorationsProvider implements FileDecorationProvider {
         return {
             color: new ThemeColor(active ? "gitDecoration.addedResourceForeground" : "disabledForeground"),
             badge: active ? "ON" : "",
-
         }
     }
 
-    public refresh(uri: Uri) {
-        this._onDidChangeFileDecorations?.fire(uri);
+    public refresh() {
+        this._onDidChangeFileDecorations.fire(undefined);
     }
 }
