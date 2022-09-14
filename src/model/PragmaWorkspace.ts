@@ -1,4 +1,4 @@
-import { TreeItem, TreeItemCollapsibleState, Uri, workspace, WorkspaceFolder } from 'vscode';
+import { Position, TreeItem, TreeItemCollapsibleState, Uri, workspace, WorkspaceFolder } from 'vscode';
 import { getFiles } from '../parser/getFiles';
 import { parse } from '../parser/parse';
 import { Pragma } from './Pragma';
@@ -41,19 +41,14 @@ export class PragmaWorkspace extends TreeItem implements PragmaTreeItem {
             parseResults.push(...results);
         }
 
-        this.pragmas = uniqueIds.map(id => {
+        this.pragmas = uniqueIds.map((id) => {
             const uris: Uri[] = [];
-            for (let result of parseResults) {
-                if (result.id !== id) {
-                    continue;
-                }
-                if (uris.includes(result.uri)) {
-                    continue;
-                }
-                uris.push(result.uri);
-            }
-    
-            return new Pragma(id, uris, this.workspace)
+
+            return new Pragma(
+                id,
+                parseResults.filter((result) => result.id === id),
+                this.workspace
+            );
         });
 
         return this.pragmas;
