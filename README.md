@@ -1,35 +1,31 @@
 # AL Pragma Explorer README
 
-This is the README for your extension "al-pragma-explorer". After writing up a brief description, we recommend including the following sections.
-
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+This extension enables a view in the Explorer.
 
-For example if there is an image subfolder under your extension project workspace:
+The view shows a treeview of 
+- workspaces
+  - pragmas
+    - files
+      - Line `where-used`
 
-\!\[feature X\]\(images/feature-x.png\)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+![al-Pragme-View](img/Code_HByrb9tr2Y.gif)
 
 ## Requirements
 
-The Pragma Explorer is based on the AL programming language for Microsoft Dynamics 365 Business Central.
+Extension gets activate on AL language detection
 
 ## Extension Settings
 
-Currently, we add no settings.
+None (in progress)
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of AL Pragma Explorer
+> September 14, 2022
+>
+>- Initial release of AL Pragma Explorer
 
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
--   [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
