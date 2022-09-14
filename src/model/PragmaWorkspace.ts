@@ -51,6 +51,6 @@ export class PragmaWorkspace extends TreeItem implements PragmaTreeItem {
             );
         });
 
-        return this.pragmas;
+        return this.pragmas.sort((a, b) => (a.name! > b.name! ? 1 : -1));
     }
 }
