@@ -7,14 +7,16 @@ import { PragmaTreeItem } from './PragmaTreeItem';
 
 export class Pragma extends TreeItem implements PragmaTreeItem {
     private _parent: WorkspaceFolder;
+    private _uris: Uri[];
 
     public name: string;
     public files?: PragmaFile[];
 
-    constructor(pragma: PragmaParseResult, parent: WorkspaceFolder) {
-        super(pragma.id, TreeItemCollapsibleState.Collapsed);
-        this.name = pragma.id;
+    constructor(id: string, uris: Uri[], parent: WorkspaceFolder) {
+        super(id, TreeItemCollapsibleState.Collapsed);
+        this.name = id;
         this._parent = parent;
+        this._uris = uris;
     }
 
     async getChildren(): Promise<PragmaFile[]> {
@@ -22,10 +24,7 @@ export class Pragma extends TreeItem implements PragmaTreeItem {
             return this.files;
         }
 
-        const alFiles = await getFiles();
-        this.files = alFiles
-                .filter((uri) => workspace.getWorkspaceFolder(uri) === this._parent)
-                .map<PragmaFile>((uri) => new PragmaFile(uri));
+        this.files = this._uris.map<PragmaFile>((uri) => new PragmaFile(uri, this.name));
         return this.files;
     }
 }

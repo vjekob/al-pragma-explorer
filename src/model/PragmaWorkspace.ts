@@ -13,8 +13,8 @@ export class PragmaWorkspace extends TreeItem implements PragmaTreeItem {
         super(folder.name, TreeItemCollapsibleState.Collapsed);
 
         this.workspace = folder;
-
-        (this.id = folder.uri.fsPath), (this.resourceUri = folder.uri);
+        this.id = folder.uri.fsPath;
+        this.resourceUri = folder.uri;
     }
 
     async getChildren(): Promise<Pragma[]> {
@@ -24,13 +24,37 @@ export class PragmaWorkspace extends TreeItem implements PragmaTreeItem {
 
         const alFiles = await getFiles();
         const myFiles = alFiles.filter((uri) => workspace.getWorkspaceFolder(uri) === this.workspace);
-
-        const pragmas: PragmaParseResult[] = [];
-        for (let file of myFiles) {
-            pragmas.push(...parse(file));
+        if (!myFiles.length) {
+            return [];
         }
 
-        this.pragmas = pragmas.map(pragma => new Pragma(pragma, this.workspace));
+        const parseResults: PragmaParseResult[] = [];
+        const uniqueIds: string[] = [];
+        for (let file of myFiles) {
+            const results = parse(file);
+            for (let result of results) {
+                if (uniqueIds.includes(result.id)) {
+                    continue;
+                }
+                uniqueIds.push(result.id);
+            }
+            parseResults.push(...results);
+        }
+
+        this.pragmas = uniqueIds.map(id => {
+            const uris: Uri[] = [];
+            for (let result of parseResults) {
+                if (result.id !== id) {
+                    continue;
+                }
+                if (uris.includes(result.uri)) {
+                    continue;
+                }
+                uris.push(result.uri);
+            }
+    
+            return new Pragma(id, uris, this.workspace)
+        });
 
         return this.pragmas;
     }

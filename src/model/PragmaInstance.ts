@@ -1,12 +1,12 @@
-import { Range, TreeItem, TreeItemCollapsibleState } from 'vscode';
+import { Position, TreeItem, TreeItemCollapsibleState } from 'vscode';
 import { PragmaTreeItem } from './PragmaTreeItem';
 
 export class PragmaInstance extends TreeItem implements PragmaTreeItem {
-    public range: Range;
+    public position: Position;
 
-    constructor(range: Range) {
-        super(`Line ${range.start.line + 1}`, TreeItemCollapsibleState.None);
-        this.range = range;
+    constructor(position: Position) {
+        super(`Line ${position.line + 1}`, TreeItemCollapsibleState.None);
+        this.position = position;
     }
 
     getChildren() {
