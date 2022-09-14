@@ -1,8 +1,16 @@
 {
     "name": "al-pragma-explorer",
-    "displayName": "al-pragma-explorer",
-    "description": "This extension lets you explore pragmas",
+    "displayName": "AL Pragma Explorer",
+    "description": "Presents and manages precompiler conditional directives for AL Language workspaces",
+    "publisher": "vjeko",
     "version": "0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vjekob/al-pragma-explorer"
+    },
+    "homepage": "https://github.com/vjekob/al-pragma-explorer",
+    "bugs": "https://github.com/vjekob/al-pragma-explorer/issues",
+    "icon": "img/icon.png",
     "engines": {
         "vscode": "^1.71.0"
     },
@@ -73,6 +81,5 @@
         "mocha": "^10.0.0",
         "typescript": "^4.7.4",
         "@vscode/test-electron": "^2.1.5"
-    },
-    "icon": "https://cdn2.iconfinder.com/data/icons/technology-straight-line/128/SVG_LINE_TECHNOLOGY-01-256.png"
+    }
 }
