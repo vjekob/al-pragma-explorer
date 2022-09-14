@@ -1,12 +1,12 @@
 import { Uri, WorkspaceFolder } from 'vscode';
 import * as fs from 'fs';
-import { AlApp } from './AlApp';
+import { ALApp } from './AlApp';
 
 function getPath(folder: WorkspaceFolder) {
     return `${folder.uri?.fsPath}/app.json`;
 }
 
-export async function getAlApp(folder: WorkspaceFolder): Promise<AlApp | undefined> {
+export async function getAlApp(folder: WorkspaceFolder): Promise<ALApp | undefined> {
     if (!folder) {
         return;
     }
